@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: templo-uno-erp
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /api/auth/me
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_PATH
+        value: /var/data/templo-uno-erp.db
+    disk:
+      name: erp-data
+      mountPath: /var/data
+      sizeGB: 1
